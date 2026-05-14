@@ -1,4 +1,4 @@
-https://www.figma.com/site/w5a13dvjsB8EsPuDLso0QG/projekt?node-id=0-1&t=9FwxHLwKTjErv7UP-1
+https://www.figma.com/design/6h3BfOXdTBxTzqunug70RZ/Untitled--Copy-?node-id=2004-3&t=IjHvJPajSiuQ00Lj-1
 
 https://pslib-cz.github.io/2025-p2b-web-project-AdamHerberger/
 
