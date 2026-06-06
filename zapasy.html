@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LigaStats – Zápasy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+  <style>
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 7px 18px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab.active { background: rgba(59,111,245,0.18); color: var(--accent2); }
+    .tab:hover:not(.active) { color: var(--subtle); }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .filter-btn.active { border-color: var(--accent); color: var(--accent2); background: rgba(59,111,245,0.1); }
+    .filter-btn:hover:not(.active) { color: var(--subtle); }
+
+    .day-group { margin-bottom: 20px; }
+    .day-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+
+    .match-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+    .match-card:hover { border-color: rgba(59,111,245,0.25); background: rgba(255,255,255,0.02); }
+
+    .match-league-tag {
+      font-size: 9.5px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      width: 36px;
+      text-align: center;
+    }
+
+    .match-time {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 42px;
+      text-align: center;
+    }
+
+    .match-teams-block {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .match-team {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .match-team.away { flex-direction: row-reverse; }
+    .match-team.away .match-team-name { text-align: right; }
+
+    .match-badge {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .match-team-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .match-vs {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+
+    .match-result {
+      font-size: 18px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      letter-spacing: -0.5px;
+      min-width: 52px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .match-result.win  { color: var(--green); }
+    .match-result.loss { color: var(--red); }
+    .match-result.draw { color: var(--yellow); }
+    .match-result.upcoming { color: var(--muted); font-size: 13px; }
+
+    .live-badge {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(52,211,153,0.15);
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .live-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-right: 4px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .page-header { margin-bottom: 22px; }
+    .page-heading { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
+    .page-heading span { color: var(--accent2); }
+    .page-sub { font-size: 13px; color: var(--muted); margin-top: 4px; font-family: var(--font-mono); }
+
+    @media (max-width: 600px) {
+      .match-card { padding: 12px 12px; gap: 8px; }
+      .match-team-name { font-size: 12px; }
+      .match-result { font-size: 15px; min-width: 42px; }
+      .filter-row { gap: 6px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+  <nav class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="logo-text">
+        <strong>Liga</strong><br>
+        <em>STATS</em>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Navigace</div>
+      <a class="nav-item" href="index.html">
+        <span class="nav-icon">⊞</span> Přehled
+      </a>
+      <a class="nav-item" href="#">
+        <span class="nav-icon">🏆</span> Ligy
+        <span class="nav-badge">6</span>
+      </a>
+      <a class="nav-item active" href="zapasy.html">
+        <span class="nav-icon">📅</span> Zápasy
+      </a>
+      <a class="nav-item" href="#">
+        <span class="nav-icon">👤</span> TOP hráči
+      </a>
+    </div>
+
+    <div class="nav-label" style="padding: 4px 22px 6px;">Oblíbené ligy</div>
+    <div class="sidebar-leagues">
+      <div class="league-row" onclick="window.location.href='premier-league.html'">
+        <div class="league-dot" style="background:#3b6ff5;"></div>
+        <span class="league-row-name">Premier League</span>
+      </div>
+      <div class="league-row" onclick="window.location.href='laliga.html'">
+        <div class="league-dot" style="background:#f87171;"></div>
+        <span class="league-row-name">LaLiga</span>
+      </div>
+      <div class="league-row">
+        <div class="league-dot" style="background:#34d399;"></div>
+        <span class="league-row-name">League ONE</span>
+      </div>
+      <div class="league-row">
+        <div class="league-dot" style="background:#a78bfa;"></div>
+        <span class="league-row-name">Serie A</span>
+      </div>
+      <div class="league-row">
+        <div class="league-dot" style="background:#fbbf24;"></div>
+        <span class="league-row-name">Bundesliga</span>
+      </div>
+      <div class="league-row">
+        <div class="league-dot" style="background:#f472b6;"></div>
+        <span class="league-row-name">Fortuna Liga</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="kontakt.html" style="margin-bottom:0;">
+        <span class="nav-icon">📞</span> Kontakty
+      </a>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="page-title">Liga<span>Stats</span></div>
+      </div>
+      <div class="topbar-right">
+        <div class="search">🔍 &nbsp;Hledat týmy, hráče…</div>
+        <div class="season-badge">2025 / 26</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="page-header">
+        <div class="page-heading">Zá<span>pasy</span></div>
+        <div class="page-sub">Výsledky a program · sezóna 2025/26</div>
+      </div>
+
+      <!-- ZÁLOŽKY -->
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'odehrane')">Odehrané</div>
+        <div class="tab" onclick="switchTab(this,'nadchazejici')">Nadcházející</div>
+      </div>
+
+      <!-- FILTRY -->
+      <div class="filter-row">
+        <div class="filter-btn active" onclick="filterLeague(this,'vse')">Všechny</div>
+        <div class="filter-btn" onclick="filterLeague(this,'PL')">Premier League</div>
+        <div class="filter-btn" onclick="filterLeague(this,'LL')">LaLiga</div>
+        <div class="filter-btn" onclick="filterLeague(this,'BL')">Bundesliga</div>
+        <div class="filter-btn" onclick="filterLeague(this,'SA')">Serie A</div>
+        <div class="filter-btn" onclick="filterLeague(this,'CH:L')">Chance Liga</div>
+      </div>
+
+      <!-- ODEHRANÉ -->
+      <div id="odehrane">
+
+        <div class="day-group" data-league="PL BL SA LL CH:L">
+          <div class="day-label">Sobota 12. dubna 2025</div>
+
+          <div class="match-card" data-league="PL">
+            <span class="match-league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
+            <div class="match-time">15:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#f87171;">ARS</div>
+                <span class="match-team-name">Arsenal</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(255,255,255,0.05);color:#4b5a74;">LUT</div>
+                <span class="match-team-name">Luton Town</span>
+              </div>
+            </div>
+            <div class="match-result win">3 : 0</div>
+          </div>
+
+          <div class="match-card" data-league="PL">
+            <span class="match-league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
+            <div class="match-time">17:30</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(52,211,153,0.12);color:#34d399;">CHE</div>
+                <span class="match-team-name">Chelsea</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(52,211,153,0.15);color:#34d399;">NOT</div>
+                <span class="match-team-name">Nottm Forest</span>
+              </div>
+            </div>
+            <div class="match-result loss">1 : 3</div>
+          </div>
+
+          <div class="match-card" data-league="BL">
+            <span class="match-league-tag" style="background:rgba(251,191,36,0.12);color:#fbbf24;">BL</span>
+            <div class="match-time">18:30</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;">BAY</div>
+                <span class="match-team-name">Bayern</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(251,191,36,0.2);color:#fde68a;">BVB</div>
+                <span class="match-team-name">Dortmund</span>
+              </div>
+            </div>
+            <div class="match-result win">4 : 2</div>
+          </div>
+        </div>
+
+        <div class="day-group" data-league="PL LL SA">
+          <div class="day-label">Neděle 13. dubna 2025</div>
+
+          <div class="match-card" data-league="PL">
+            <span class="match-league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
+            <div class="match-time">14:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(96,165,250,0.15);color:#93c5fd;">LIV</div>
+                <span class="match-team-name">Liverpool</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(59,111,245,0.2);color:#60a5fa;">MC</div>
+                <span class="match-team-name">Man City</span>
+              </div>
+            </div>
+            <div class="match-result draw">1 : 1</div>
+          </div>
+
+          <div class="match-card" data-league="LL">
+            <span class="match-league-tag" style="background:rgba(248,113,113,0.15);color:#f87171;">LL</span>
+            <div class="match-time">16:15</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#fca5a5;">RMA</div>
+                <span class="match-team-name">Real Madrid</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(248,113,113,0.1);color:#fda4af;">SEV</div>
+                <span class="match-team-name">Sevilla</span>
+              </div>
+            </div>
+            <div class="match-result win">3 : 1</div>
+          </div>
+
+          <div class="match-card" data-league="SA">
+            <span class="match-league-tag" style="background:rgba(167,139,250,0.15);color:#a78bfa;">SA</span>
+            <div class="match-time">20:45</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(52,211,153,0.12);color:#34d399;">INT</div>
+                <span class="match-team-name">Inter Milán</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(255,255,255,0.08);color:#94a3b8;">JUV</div>
+                <span class="match-team-name">Juventus</span>
+              </div>
+            </div>
+            <div class="match-result win">2 : 1</div>
+          </div>
+        </div>
+
+        <div class="day-group" data-league=CH:L LL">
+          <div class="day-label">Pondělí 14. dubna 2025</div>
+
+          <div class="match-card" data-league="CH:L">
+            <span class="match-league-tag" style="background:rgba(244,114,182,0.15);color:#f472b6;">CH:L</span>
+            <div class="match-time">18:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(244,114,182,0.15);color:#f472b6;">SLA</div>
+                <span class="match-team-name">Slavia Praha</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(96,165,250,0.15);color:#93c5fd;">SPL</div>
+                <span class="match-team-name">Sparta Praha</span>
+              </div>
+            </div>
+            <div class="match-result draw">1 : 1</div>
+          </div>
+
+          <div class="match-card" data-league="LL">
+            <span class="match-league-tag" style="background:rgba(248,113,113,0.15);color:#f87171;">LL</span>
+            <div class="match-time">21:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(59,111,245,0.2);color:#60a5fa;">BAR</div>
+                <span class="match-team-name">Barcelona</span>
+              </div>
+              <div class="match-vs">–</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(52,211,153,0.1);color:#34d399;">GIR</div>
+                <span class="match-team-name">Girona</span>
+              </div>
+            </div>
+            <div class="match-result draw">2 : 2</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NADCHÁZEJÍCÍ -->
+      <div id="nadchazejici" style="display:none;">
+
+        <div class="day-group" data-league="PL BL SA">
+          <div class="day-label">Sobota 19. dubna 2025</div>
+
+          <div class="match-card" data-league="PL">
+            <span class="match-league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
+            <div class="match-time">13:30</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(59,111,245,0.2);color:#60a5fa;">MC</div>
+                <span class="match-team-name">Man City</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#f87171;">ARS</div>
+                <span class="match-team-name">Arsenal</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">13:30</div>
+          </div>
+
+          <div class="match-card" data-league="PL">
+            <span class="match-league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
+            <div class="match-time">16:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(167,139,250,0.15);color:#a78bfa;">AVL</div>
+                <span class="match-team-name">Aston Villa</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(96,165,250,0.15);color:#93c5fd;">LIV</div>
+                <span class="match-team-name">Liverpool</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">16:00</div>
+          </div>
+
+          <div class="match-card" data-league="BL">
+            <span class="match-league-tag" style="background:rgba(251,191,36,0.12);color:#fbbf24;">BL</span>
+            <div class="match-time">15:30</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#f87171;">RBL</div>
+                <span class="match-team-name">RB Lipsko</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;">BAY</div>
+                <span class="match-team-name">Bayern</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">15:30</div>
+          </div>
+        </div>
+
+        <div class="day-group" data-league="LL SA CH:L">
+          <div class="day-label">Neděle 20. dubna 2025</div>
+
+          <div class="match-card" data-league="LL">
+            <span class="match-league-tag" style="background:rgba(248,113,113,0.15);color:#f87171;">LL</span>
+            <div class="match-time">16:15</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(248,113,113,0.2);color:#f87171;">ATM</div>
+                <span class="match-team-name">Atlético</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#fca5a5;">RMA</div>
+                <span class="match-team-name">Real Madrid</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">16:15</div>
+          </div>
+
+          <div class="match-card" data-league="SA">
+            <span class="match-league-tag" style="background:rgba(167,139,250,0.15);color:#a78bfa;">SA</span>
+            <div class="match-time">18:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(248,113,113,0.15);color:#f87171;">ACM</div>
+                <span class="match-team-name">AC Milán</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(52,211,153,0.12);color:#34d399;">INT</div>
+                <span class="match-team-name">Inter Milán</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">18:00</div>
+          </div>
+
+          <div class="match-card" data-league=CH:L">
+            <span class="match-league-tag" style="background:rgba(244,114,182,0.15);color:#f472b6;">CH:L</span>
+            <div class="match-time">15:00</div>
+            <div class="match-teams-block">
+              <div class="match-team">
+                <div class="match-badge" style="background:rgba(59,111,245,0.2);color:#60a5fa;">PLZ</div>
+                <span class="match-team-name">Plzeň</span>
+              </div>
+              <div class="match-vs">vs</div>
+              <div class="match-team away">
+                <div class="match-badge" style="background:rgba(244,114,182,0.15);color:#f472b6;">SLA</div>
+                <span class="match-team-name">Slavia Praha</span>
+              </div>
+            </div>
+            <div class="match-result upcoming">15:00</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('visible');
+    }
+    function closeSidebar() {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('overlay').classList.remove('visible');
+    }
+
+    function switchTab(el, tabId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('odehrane').style.display = 'none';
+      document.getElementById('nadchazejici').style.display = 'none';
+      document.getElementById(tabId).style.display = 'block';
+      // reset filtru
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn').classList.add('active');
+      filterLeague(document.querySelector('.filter-btn'), 'vse');
+    }
+
+    function filterLeague(el, league) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+
+      const activeTab = document.getElementById('odehrane').style.display !== 'none' ? 'odehrane' : 'nadchazejici';
+      const container = document.getElementById(activeTab);
+
+      container.querySelectorAll('.match-card').forEach(card => {
+        if (league === 'vse' || card.dataset.league === league) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // skryj prázdné day-group
+      container.querySelectorAll('.day-group').forEach(group => {
+        const visible = [...group.querySelectorAll('.match-card')].some(c => c.style.display !== 'none');
+        group.style.display = visible ? 'block' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
