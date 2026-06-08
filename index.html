@@ -6,16 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LigaStats – Přehled</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
   <style>
-
     .hero {
-      background: linear-gradient(135deg, rgba(59,111,245,0.12) 0%, rgba(167,139,250,0.08) 100%);
+      background: linear-gradient(135deg, rgba(59, 111, 245, 0.12) 0%, rgba(167, 139, 250, 0.08) 100%);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 28px 28px 24px;
@@ -23,14 +25,18 @@
       position: relative;
       overflow: hidden;
     }
+
     .hero::before {
       content: '';
       position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(59,111,245,0.15) 0%, transparent 70%);
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(59, 111, 245, 0.15) 0%, transparent 70%);
       pointer-events: none;
     }
+
     .hero-label {
       font-size: 10px;
       font-family: var(--font-mono);
@@ -39,6 +45,7 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
+
     .hero-title {
       font-size: 28px;
       font-weight: 800;
@@ -47,25 +54,36 @@
       margin-bottom: 6px;
       line-height: 1.2;
     }
-    .hero-title span { color: var(--accent2); }
+
+    .hero-title span {
+      color: var(--accent2);
+    }
+
     .hero-sub {
       font-size: 13px;
       color: var(--muted);
       font-family: var(--font-mono);
       margin-bottom: 20px;
     }
+
     .hero-stats {
       display: flex;
       gap: 24px;
       flex-wrap: wrap;
     }
-    .hero-stat { display: flex; flex-direction: column; }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
     .hero-stat-val {
       font-size: 22px;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.5px;
     }
+
     .hero-stat-lbl {
       font-size: 10px;
       color: var(--muted);
@@ -73,7 +91,12 @@
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
-    .hero-divider { width: 1px; background: var(--border); align-self: stretch; }
+
+    .hero-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+    }
 
     .section-label {
       font-size: 10px;
@@ -91,6 +114,7 @@
       gap: 16px;
       margin-bottom: 20px;
     }
+
     .stat-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -100,13 +124,18 @@
       align-items: center;
       gap: 14px;
     }
+
     .stat-card-icon {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       flex-shrink: 0;
     }
+
     .stat-card-val {
       font-size: 22px;
       font-weight: 800;
@@ -114,6 +143,7 @@
       letter-spacing: -0.5px;
       line-height: 1;
     }
+
     .stat-card-lbl {
       font-size: 11px;
       color: var(--muted);
@@ -123,13 +153,25 @@
 
     .live-dot {
       display: inline-block;
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--green);
       margin-right: 6px;
       animation: pulse 1.5s infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
 
     .league-tag {
       font-size: 9.5px;
@@ -150,7 +192,10 @@
       justify-content: space-between;
       margin-bottom: 14px;
     }
-    .gallery-section-header .section-label { margin-bottom: 0; }
+
+    .gallery-section-header .section-label {
+      margin-bottom: 0;
+    }
 
     .gallery-link {
       font-size: 11px;
@@ -162,9 +207,12 @@
       gap: 5px;
       transition: color 0.15s;
     }
-    .gallery-link:hover { color: var(--accent2); }
 
-    /* CSS Grid galerie podle zadání */
+    .gallery-link:hover {
+      color: var(--accent2);
+    }
+
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -172,7 +220,7 @@
       gap: 10px;
     }
 
- 
+
     .gallery-item {
       position: relative;
       border-radius: 12px;
@@ -181,34 +229,57 @@
       border: 1px solid var(--border);
       background: var(--card);
       aspect-ratio: 4/3;
-      transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1),
-                  border-color 0.2s,
-                  box-shadow 0.28s;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+        border-color 0.2s,
+        box-shadow 0.28s;
       animation: galleryReveal 0.5s ease both;
     }
+
     .gallery-item:hover {
       transform: translateY(-4px) scale(1.015);
-      border-color: rgba(59,111,245,0.35);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,111,245,0.15);
+      border-color: rgba(59, 111, 245, 0.35);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 111, 245, 0.15);
     }
 
-    /* První karta velká: 2 sloupce × 2 řádky */
+
     .gallery-item.featured {
       grid-column: span 2;
       grid-row: span 2;
       aspect-ratio: unset;
     }
 
-    /* CSS Animace pro postupné načtení galerie */
+
     @keyframes galleryReveal {
-      from { opacity: 0; transform: translateY(16px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    .gallery-item:nth-child(1) { animation-delay: 0.25s; }
-    .gallery-item:nth-child(2) { animation-delay: 0.30s; }
-    .gallery-item:nth-child(3) { animation-delay: 0.35s; }
-    .gallery-item:nth-child(4) { animation-delay: 0.38s; }
-    .gallery-item:nth-child(5) { animation-delay: 0.41s; }
+
+    .gallery-item:nth-child(1) {
+      animation-delay: 0.25s;
+    }
+
+    .gallery-item:nth-child(2) {
+      animation-delay: 0.30s;
+    }
+
+    .gallery-item:nth-child(3) {
+      animation-delay: 0.35s;
+    }
+
+    .gallery-item:nth-child(4) {
+      animation-delay: 0.38s;
+    }
+
+    .gallery-item:nth-child(5) {
+      animation-delay: 0.41s;
+    }
 
     .stadium-bg {
       position: absolute;
@@ -216,66 +287,98 @@
       transition: transform 0.45s ease, filter 0.3s ease;
       filter: brightness(0.65) saturate(1.1);
       background-size: cover;
-      background-position: center;
+
     }
+
     .gallery-item:hover .stadium-bg {
       transform: scale(1.08);
       filter: brightness(0.45) saturate(1.2);
     }
 
-   
-    .s-emirates { 
-      background: linear-gradient(135deg, rgba(26,10,46,0.55) 0%, rgba(45,27,78,0.4) 30%, rgba(192,57,43,0.3) 60%, rgba(231,76,60,0.4) 80%, rgba(255,107,53,0.4) 100%), 
-                  url('https://thumbs.dreamstime.com/b/emirates-stadium-home-arsenal-london-soccer-club-aerial-view-london-uk-december-emirates-stadium-home-arsenal-london-soccer-265209635.jpg?w=768'); 
-    }
-    .s-bernabeu { 
-      background: linear-gradient(135deg, rgba(26,26,46,0.55) 0%, rgba(22,33,62,0.4) 30%, rgba(15,52,96,0.3) 60%, rgba(83,52,131,0.4) 80%, rgba(233,69,96,0.4) 100%), 
-                  url('https://www.pixelstalk.net/wp-content/uploads/2015/05/Real-Madrid-Stadium-Santiago-Bernabeu-full-view.jpg'); 
-    }
-    .s-allianz  { 
-      background: linear-gradient(135deg, rgba(10,10,26,0.55) 0%, rgba(26,26,62,0.4) 30%, rgba(192,57,43,0.3) 55%, rgba(204,0,0,0.4) 75%, rgba(255,34,34,0.4) 100%), 
-                  url('https://th.bing.com/th/id/OIP.PjfLpK4NuSor8kHtlc-iYQHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3'); 
-    }
-    .s-anfield  { 
-      background: linear-gradient(135deg, rgba(13,27,42,0.55) 0%, rgba(26,47,74,0.4) 30%, rgba(192,57,43,0.3) 55%, rgba(231,76,60,0.4) 75%, rgba(255,68,68,0.4) 100%), 
-                  url('https://backend.liverpoolfc.com/sites/default/files/styles/lg/public/2023-12/anfield-aerial-view-01122023-5.webp?itok=m35Xy6z0&width=1680'); 
-    }
-    .s-sansiro  { 
-      background: linear-gradient(135deg, rgba(26,10,10,0.55) 0%, rgba(61,12,12,0.4) 30%, rgba(192,57,43,0.3) 55%, rgba(26,26,62,0.4) 75%, rgba(0,0,51,0.4) 100%), 
-                  url('https://www.theneweuropean.co.uk/wp-content/uploads/sites/2/2023/05/GettyImages-1129453765.jpg'); 
+
+    .s-emirates {
+      background: linear-gradient(135deg, rgba(26, 10, 46, 0.55) 0%, rgba(45, 27, 78, 0.4) 30%, rgba(192, 57, 43, 0.3) 60%, rgba(231, 76, 60, 0.4) 80%, rgba(255, 107, 53, 0.4) 100%),
+        url('https://thumbs.dreamstime.com/b/emirates-stadium-home-arsenal-london-soccer-club-aerial-view-london-uk-december-emirates-stadium-home-arsenal-london-soccer-265209635.jpg?w=768');
+      background-position: center 40%, center 40%;
+      background-size: cover, cover;
     }
 
-    
+    .s-bernabeu {
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.55) 0%, rgba(22, 33, 62, 0.4) 30%, rgba(15, 52, 96, 0.3) 60%, rgba(83, 52, 131, 0.4) 80%, rgba(233, 69, 96, 0.4) 100%),
+        url('https://www.pixelstalk.net/wp-content/uploads/2015/05/Real-Madrid-Stadium-Santiago-Bernabeu-full-view.jpg');
+      background-position: center 30%, center 30%;
+      background-size: cover, cover;
+    }
+
+    .s-allianz {
+      background: linear-gradient(135deg, rgba(10, 10, 26, 0.55) 0%, rgba(26, 26, 62, 0.4) 30%, rgba(192, 57, 43, 0.3) 55%, rgba(204, 0, 0, 0.4) 75%, rgba(255, 34, 34, 0.4) 100%),
+        url('https://th.bing.com/th/id/OIP.PjfLpK4NuSor8kHtlc-iYQHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3');
+        background-position: center 20%, center 20%;
+        background-size: cover, cover;
+    }
+
+    .s-anfield {
+      background: linear-gradient(135deg, rgba(13, 27, 42, 0.55) 0%, rgba(26, 47, 74, 0.4) 30%, rgba(192, 57, 43, 0.3) 55%, rgba(231, 76, 60, 0.4) 75%, rgba(255, 68, 68, 0.4) 100%),
+        url('https://backend.liverpoolfc.com/sites/default/files/styles/lg/public/2023-12/anfield-aerial-view-01122023-5.webp?itok=m35Xy6z0&width=1680');
+        background-position: center 35%, center 35%;
+        background-size: cover, cover;
+    }
+
+    .s-sansiro {
+      background: linear-gradient(135deg, rgba(26, 10, 10, 0.55) 0%, rgba(61, 12, 12, 0.4) 30%, rgba(192, 57, 43, 0.3) 55%, rgba(26, 26, 62, 0.4) 75%, rgba(0, 0, 51, 0.4) 100%),
+        url('https://www.theneweuropean.co.uk/wp-content/uploads/sites/2/2023/05/GettyImages-1129453765.jpg');
+        background-position: center 25%, center 25%;
+  background-size: cover, cover;
+    }
+
+
     .stadium-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px),
-        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,255,255,0.015) 30px, rgba(255,255,255,0.015) 31px);
+        repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255, 255, 255, 0.025) 18px, rgba(255, 255, 255, 0.025) 19px),
+        repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255, 255, 255, 0.015) 30px, rgba(255, 255, 255, 0.015) 31px);
     }
 
     .stadium-bg::before {
       content: '';
       position: absolute;
-      bottom: -20%; left: 50%;
+      bottom: -20%;
+      left: 50%;
       transform: translateX(-50%);
-      width: 70%; height: 50%;
+      width: 70%;
+      height: 50%;
       border-radius: 50%;
       opacity: 0.25;
       filter: blur(28px);
     }
-    .s-emirates::before { background: #e74c3c; }
-    .s-bernabeu::before { background: #e94560; }
-    .s-allianz::before  { background: #cc0000; }
-    .s-anfield::before  { background: #e74c3c; }
-    .s-sansiro::before  { background: #c0392b; }
 
-    
+    .s-emirates::before {
+      background: #e74c3c;
+    }
+
+    .s-bernabeu::before {
+      background: #e94560;
+    }
+
+    .s-allianz::before {
+      background: #cc0000;
+    }
+
+    .s-anfield::before {
+      background: #e74c3c;
+    }
+
+    .s-sansiro::before {
+      background: #c0392b;
+    }
+
+
     .gallery-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(5,8,18,0.92) 0%, rgba(5,8,18,0.15) 55%, transparent 100%);
+      background: linear-gradient(to top, rgba(5, 8, 18, 0.92) 0%, rgba(5, 8, 18, 0.15) 55%, transparent 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -284,19 +387,27 @@
 
     .gallery-zoom-icon {
       position: absolute;
-      top: 10px; right: 10px;
-      width: 30px; height: 30px;
-      background: rgba(59,111,245,0.2);
-      border: 1px solid rgba(59,111,245,0.3);
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      background: rgba(59, 111, 245, 0.2);
+      border: 1px solid rgba(59, 111, 245, 0.3);
       border-radius: 7px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 13px;
       opacity: 0;
       transform: translateY(-4px);
       transition: opacity 0.2s, transform 0.2s;
       backdrop-filter: blur(4px);
     }
-    .gallery-item:hover .gallery-zoom-icon { opacity: 1; transform: translateY(0); }
+
+    .gallery-item:hover .gallery-zoom-icon {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .gallery-tag {
       font-size: 9px;
@@ -307,6 +418,7 @@
       margin-bottom: 5px;
       width: fit-content;
     }
+
     .gallery-name {
       font-size: 13px;
       font-weight: 700;
@@ -314,14 +426,15 @@
       letter-spacing: -0.2px;
       line-height: 1.2;
     }
+
     .gallery-meta {
       font-size: 10.5px;
       font-family: var(--font-mono);
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
       margin-top: 2px;
     }
 
-    
+
     .gallery-stats {
       display: flex;
       gap: 6px;
@@ -330,33 +443,80 @@
       transform: translateY(5px);
       transition: opacity 0.22s 0.05s, transform 0.22s 0.05s;
     }
-    .gallery-item:hover .gallery-stats { opacity: 1; transform: translateY(0); }
+
+    .gallery-item:hover .gallery-stats {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .stat-chip {
       font-size: 9.5px;
       font-family: var(--font-mono);
-      color: rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.07);
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.07);
       padding: 2px 6px;
       border-radius: 4px;
     }
 
-    .gallery-item.featured .gallery-name { font-size: 16px; }
-    .gallery-item.featured .gallery-meta { font-size: 11.5px; }
+    .gallery-item.featured .gallery-name {
+      font-size: 16px;
+    }
+
+    .gallery-item.featured .gallery-meta {
+      font-size: 11.5px;
+    }
 
     @media (max-width: 900px) {
-      .three-col { grid-template-columns: 1fr 1fr; }
-      .hero-title { font-size: 22px; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item.featured { grid-column: span 2; grid-row: span 1; aspect-ratio: 16/7; }
+      .three-col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-title {
+        font-size: 22px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-item.featured {
+        grid-column: span 2;
+        grid-row: span 1;
+        aspect-ratio: 16/7;
+      }
     }
+
     @media (max-width: 600px) {
-      .three-col { grid-template-columns: 1fr; }
-      .hero { padding: 20px 16px; }
-      .hero-title { font-size: 18px; }
-      .hero-stats { gap: 16px; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
-      .gallery-item.featured { grid-column: span 2; grid-row: span 1; aspect-ratio: 16/8; }
-      .gallery-name { font-size: 11px; }
+      .three-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 20px 16px;
+      }
+
+      .hero-title {
+        font-size: 18px;
+      }
+
+      .hero-stats {
+        gap: 16px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+
+      .gallery-item.featured {
+        grid-column: span 2;
+        grid-row: span 1;
+        aspect-ratio: 16/8;
+      }
+
+      .gallery-name {
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -509,46 +669,76 @@
           <div class="scorer-row">
             <div class="scorer-rank gold">1</div>
             <div class="scorer-avatar" style="background:rgba(248,113,113,0.15);color:#fca5a5;">EH</div>
-            <div class="scorer-info"><div class="scorer-name">E. Haaland</div><div class="scorer-club">Man City</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">E. Haaland</div>
+              <div class="scorer-club">Man City</div>
+            </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <span class="league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
-              <div class="scorer-stat"><div class="scorer-num">27</div><div class="scorer-sub">gólů</div></div>
+              <div class="scorer-stat">
+                <div class="scorer-num">27</div>
+                <div class="scorer-sub">gólů</div>
+              </div>
             </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-rank silver">2</div>
             <div class="scorer-avatar" style="background:rgba(248,113,113,0.15);color:#fca5a5;">KM</div>
-            <div class="scorer-info"><div class="scorer-name">K. Mbappé</div><div class="scorer-club">Real Madrid</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">K. Mbappé</div>
+              <div class="scorer-club">Real Madrid</div>
+            </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <span class="league-tag" style="background:rgba(248,113,113,0.15);color:#f87171;">LL</span>
-              <div class="scorer-stat"><div class="scorer-num">22</div><div class="scorer-sub">gólů</div></div>
+              <div class="scorer-stat">
+                <div class="scorer-num">22</div>
+                <div class="scorer-sub">gólů</div>
+              </div>
             </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-rank bronze">3</div>
             <div class="scorer-avatar" style="background:rgba(251,191,36,0.15);color:#fbbf24;">HK</div>
-            <div class="scorer-info"><div class="scorer-name">H. Kane</div><div class="scorer-club">Bayern Mnichov</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">H. Kane</div>
+              <div class="scorer-club">Bayern Mnichov</div>
+            </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <span class="league-tag" style="background:rgba(251,191,36,0.12);color:#fbbf24;">BL</span>
-              <div class="scorer-stat"><div class="scorer-num">24</div><div class="scorer-sub">gólů</div></div>
+              <div class="scorer-stat">
+                <div class="scorer-num">24</div>
+                <div class="scorer-sub">gólů</div>
+              </div>
             </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-rank">4</div>
             <div class="scorer-avatar" style="background:rgba(96,165,250,0.15);color:#93c5fd;">MS</div>
-            <div class="scorer-info"><div class="scorer-name">M. Salah</div><div class="scorer-club">Liverpool</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">M. Salah</div>
+              <div class="scorer-club">Liverpool</div>
+            </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <span class="league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
-              <div class="scorer-stat"><div class="scorer-num">15</div><div class="scorer-sub">gólů</div></div>
+              <div class="scorer-stat">
+                <div class="scorer-num">15</div>
+                <div class="scorer-sub">gólů</div>
+              </div>
             </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-rank">5</div>
             <div class="scorer-avatar" style="background:rgba(167,139,250,0.15);color:#a78bfa;">LM</div>
-            <div class="scorer-info"><div class="scorer-name">L. Martínez</div><div class="scorer-club">Inter Milán</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">L. Martínez</div>
+              <div class="scorer-club">Inter Milán</div>
+            </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <span class="league-tag" style="background:rgba(167,139,250,0.15);color:#a78bfa;">SA</span>
-              <div class="scorer-stat"><div class="scorer-num">19</div><div class="scorer-sub">gólů</div></div>
+              <div class="scorer-stat">
+                <div class="scorer-num">19</div>
+                <div class="scorer-sub">gólů</div>
+              </div>
             </div>
           </div>
         </div>
@@ -563,31 +753,46 @@
           </div>
           <div class="match-row">
             <span class="league-tag" style="background:rgba(59,111,245,0.15);color:#60a5fa;">PL</span>
-            <div class="match-teams"><div class="match-home">Arsenal</div><div class="match-away">Luton Town</div></div>
+            <div class="match-teams">
+              <div class="match-home">Arsenal</div>
+              <div class="match-away">Luton Town</div>
+            </div>
             <div class="match-score win">3:0</div>
             <div class="match-date">12.04.</div>
           </div>
           <div class="match-row">
             <span class="league-tag" style="background:rgba(248,113,113,0.15);color:#f87171;">LL</span>
-            <div class="match-teams"><div class="match-home">Real Madrid</div><div class="match-away">Sevilla</div></div>
+            <div class="match-teams">
+              <div class="match-home">Real Madrid</div>
+              <div class="match-away">Sevilla</div>
+            </div>
             <div class="match-score win">3:1</div>
             <div class="match-date">10.04.</div>
           </div>
           <div class="match-row">
             <span class="league-tag" style="background:rgba(251,191,36,0.12);color:#fbbf24;">BL</span>
-            <div class="match-teams"><div class="match-home">Bayern</div><div class="match-away">Dortmund</div></div>
+            <div class="match-teams">
+              <div class="match-home">Bayern</div>
+              <div class="match-away">Dortmund</div>
+            </div>
             <div class="match-score win">4:2</div>
             <div class="match-date">06.04.</div>
           </div>
           <div class="match-row">
             <span class="league-tag" style="background:rgba(167,139,250,0.15);color:#a78bfa;">SA</span>
-            <div class="match-teams"><div class="match-home">Inter</div><div class="match-away">Juventus</div></div>
+            <div class="match-teams">
+              <div class="match-home">Inter</div>
+              <div class="match-away">Juventus</div>
+            </div>
             <div class="match-score win">2:1</div>
             <div class="match-date">07.04.</div>
           </div>
           <div class="match-row">
             <span class="league-tag" style="background:rgba(244,114,182,0.15);color:#f472b6;">FL</span>
-            <div class="match-teams"><div class="match-home">Slavia Praha</div><div class="match-away">Sparta Praha</div></div>
+            <div class="match-teams">
+              <div class="match-home">Slavia Praha</div>
+              <div class="match-away">Sparta Praha</div>
+            </div>
             <div class="match-score draw">1:1</div>
             <div class="match-date">05.04.</div>
           </div>
@@ -599,34 +804,62 @@
       <div class="two-col">
         <div class="card" style="cursor:pointer;" onclick="window.location.href='premier-league.html'">
           <div class="card-header">
-            <div class="card-title"><div class="card-title-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div> Premier League</div>
+            <div class="card-title">
+              <div class="card-title-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div> Premier League
+            </div>
             <span class="card-tag">Anglie · kolo 32</span>
           </div>
           <div class="scorer-row">
             <div class="scorer-avatar" style="background:rgba(59,111,245,0.2);color:#60a5fa;">MC</div>
-            <div class="scorer-info"><div class="scorer-name">Man City</div><div class="scorer-club">Lídr · 74 bodů</div></div>
-            <div class="scorer-stat"><div class="scorer-num" style="font-size:14px;">74</div><div class="scorer-sub">bodů</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">Man City</div>
+              <div class="scorer-club">Lídr · 74 bodů</div>
+            </div>
+            <div class="scorer-stat">
+              <div class="scorer-num" style="font-size:14px;">74</div>
+              <div class="scorer-sub">bodů</div>
+            </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-avatar" style="background:rgba(248,113,113,0.15);color:#f87171;">ARS</div>
-            <div class="scorer-info"><div class="scorer-name">Arsenal</div><div class="scorer-club">2. místo · 71 bodů</div></div>
-            <div class="scorer-stat"><div class="scorer-num" style="font-size:14px;">71</div><div class="scorer-sub">bodů</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">Arsenal</div>
+              <div class="scorer-club">2. místo · 71 bodů</div>
+            </div>
+            <div class="scorer-stat">
+              <div class="scorer-num" style="font-size:14px;">71</div>
+              <div class="scorer-sub">bodů</div>
+            </div>
           </div>
         </div>
         <div class="card" style="cursor:pointer;" onclick="window.location.href='laliga.html'">
           <div class="card-header">
-            <div class="card-title"><div class="card-title-icon">🇪🇸</div> LaLiga</div>
+            <div class="card-title">
+              <div class="card-title-icon">🇪🇸</div> LaLiga
+            </div>
             <span class="card-tag">Španělsko · kolo 31</span>
           </div>
           <div class="scorer-row">
             <div class="scorer-avatar" style="background:rgba(248,113,113,0.15);color:#fca5a5;">RMA</div>
-            <div class="scorer-info"><div class="scorer-name">Real Madrid</div><div class="scorer-club">Lídr · 75 bodů</div></div>
-            <div class="scorer-stat"><div class="scorer-num" style="font-size:14px;">75</div><div class="scorer-sub">bodů</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">Real Madrid</div>
+              <div class="scorer-club">Lídr · 75 bodů</div>
+            </div>
+            <div class="scorer-stat">
+              <div class="scorer-num" style="font-size:14px;">75</div>
+              <div class="scorer-sub">bodů</div>
+            </div>
           </div>
           <div class="scorer-row">
             <div class="scorer-avatar" style="background:rgba(59,111,245,0.2);color:#60a5fa;">BAR</div>
-            <div class="scorer-info"><div class="scorer-name">Barcelona</div><div class="scorer-club">2. místo · 68 bodů</div></div>
-            <div class="scorer-stat"><div class="scorer-num" style="font-size:14px;">68</div><div class="scorer-sub">bodů</div></div>
+            <div class="scorer-info">
+              <div class="scorer-name">Barcelona</div>
+              <div class="scorer-club">2. místo · 68 bodů</div>
+            </div>
+            <div class="scorer-stat">
+              <div class="scorer-num" style="font-size:14px;">68</div>
+              <div class="scorer-sub">bodů</div>
+            </div>
           </div>
         </div>
       </div>
@@ -640,8 +873,8 @@
         <div class="gallery-grid" id="homeGallery">
 
           <a class="gallery-item featured"
-             data-src="https://thumbs.dreamstime.com/b/emirates-stadium-home-arsenal-london-soccer-club-aerial-view-london-uk-december-emirates-stadium-home-arsenal-london-soccer-265209635.jpg?w=768"
-             data-sub-html="<h4>Emirates Stadium</h4><p>Arsenal FC · Londýn · 60 704 míst</p>">
+            data-src="https://thumbs.dreamstime.com/b/emirates-stadium-home-arsenal-london-soccer-club-aerial-view-london-uk-december-emirates-stadium-home-arsenal-london-soccer-265209635.jpg?w=768"
+            data-sub-html="<h4>Emirates Stadium</h4><p>Arsenal FC · Londýn · 60 704 míst</p>">
             <div class="stadium-bg s-emirates"></div>
             <div class="gallery-zoom-icon">🔍</div>
             <div class="gallery-overlay">
@@ -656,8 +889,8 @@
           </a>
 
           <a class="gallery-item"
-             data-src="https://www.pixelstalk.net/wp-content/uploads/2015/05/Real-Madrid-Stadium-Santiago-Bernabeu-full-view.jpg"
-             data-sub-html="<h4>Santiago Bernabéu</h4><p>Real Madrid · Madrid · 81 044 míst</p>">
+            data-src="https://www.pixelstalk.net/wp-content/uploads/2015/05/Real-Madrid-Stadium-Santiago-Bernabeu-full-view.jpg"
+            data-sub-html="<h4>Santiago Bernabéu</h4><p>Real Madrid · Madrid · 81 044 míst</p>">
             <div class="stadium-bg s-bernabeu"></div>
             <div class="gallery-zoom-icon">🔍</div>
             <div class="gallery-overlay">
@@ -671,8 +904,8 @@
           </a>
 
           <a class="gallery-item"
-             data-src="https://th.bing.com/th/id/OIP.PjfLpK4NuSor8kHtlc-iYQHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
-             data-sub-html="<h4>Allianz Arena</h4><p>Bayern Mnichov · Mnichov · 75 024 míst</p>">
+            data-src="https://th.bing.com/th/id/OIP.PjfLpK4NuSor8kHtlc-iYQHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+            data-sub-html="<h4>Allianz Arena</h4><p>Bayern Mnichov · Mnichov · 75 024 míst</p>">
             <div class="stadium-bg s-allianz"></div>
             <div class="gallery-zoom-icon">🔍</div>
             <div class="gallery-overlay">
@@ -686,8 +919,8 @@
           </a>
 
           <a class="gallery-item"
-             data-src="https://backend.liverpoolfc.com/sites/default/files/styles/lg/public/2023-12/anfield-aerial-view-01122023-5.webp?itok=m35Xy6z0&width=1680"
-             data-sub-html="<h4>Anfield</h4><p>Liverpool FC · Liverpool · 61 276 míst</p>">
+            data-src="https://backend.liverpoolfc.com/sites/default/files/styles/lg/public/2023-12/anfield-aerial-view-01122023-5.webp?itok=m35Xy6z0&width=1680"
+            data-sub-html="<h4>Anfield</h4><p>Liverpool FC · Liverpool · 61 276 míst</p>">
             <div class="stadium-bg s-anfield"></div>
             <div class="gallery-zoom-icon">🔍</div>
             <div class="gallery-overlay">
@@ -701,8 +934,8 @@
           </a>
 
           <a class="gallery-item"
-             data-src="https://www.theneweuropean.co.uk/wp-content/uploads/sites/2/2023/05/GettyImages-1129453765.jpg"
-             data-sub-html="<h4>San Siro</h4><p>AC Milán & Inter · Milán · 75 923 míst</p>">
+            data-src="https://www.theneweuropean.co.uk/wp-content/uploads/sites/2/2023/05/GettyImages-1129453765.jpg"
+            data-sub-html="<h4>San Siro</h4><p>AC Milán & Inter · Milán · 75 923 míst</p>">
             <div class="stadium-bg s-sansiro"></div>
             <div class="gallery-zoom-icon">🔍</div>
             <div class="gallery-overlay">
@@ -723,10 +956,11 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
 
   <script>
-  
+
     lightGallery(document.getElementById('homeGallery'), {
       selector: '.gallery-item',
       plugins: [lgZoom, lgThumbnail],
@@ -751,4 +985,5 @@
   </script>
 
 </body>
+
 </html>
