@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LigaStats – Kontakty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+    <style>
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(59, 111, 245, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            color: var(--accent2);
+        }
+
+        .contact-text-title {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 2px;
+        }
+
+        /* Kontaktní formulář */
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: var(--text);
+            font-size: 13px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent2);
+            box-shadow: 0 0 0 2px rgba(59, 111, 245, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+      
+        .btn-submit {
+            background: linear-gradient(135deg, #3b6ff5 0%, #a78bfa 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 111, 245, 0.3);
+        }
+
+        /* Sekce FAQ / Často kladené dotazy pro bohatší obsah */
+        .faq-section {
+            margin-top: 10px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .faq-question {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .faq-answer {
+            font-size: 12.5px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+
+        .contact-text-value {
+            font-variant-numeric: lining-nums;
+            -moz-font-feature-settings: "lnum";
+            -webkit-font-feature-settings: "lnum";
+            font-feature-settings: "lnum";
+        }
+
+        @media (max-width: 900px) {
+
+            .contact-grid,
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+    <nav class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="logo-text">
+                <strong>Liga</strong><br>
+                <em>STATS</em>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-label">Navigace</div>
+            <a class="nav-item" href="index.html">
+                <span class="nav-icon">⊞</span> Přehled
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-icon">🏆</span> Ligy
+                <span class="nav-badge">6</span>
+            </a>
+            <a class="nav-item" href="zapasy.html">
+                <span class="nav-icon">📅</span> Zápasy
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-icon">👤</span> TOP hráči
+            </a>
+        </div>
+
+        <div class="nav-label" style="padding: 4px 22px 6px;">Oblíbené ligy</div>
+        <div class="sidebar-leagues">
+            <div class="league-row" onclick="window.location.href='premier-league.html'">
+                <div class="league-dot" style="background:#3b6ff5;"></div>
+                <span class="league-row-name">Premier League</span>
+            </div>
+            <div class="league-row" onclick="window.location.href='laliga.html'">
+                <div class="league-dot" style="background:#f87171;"></div>
+                <span class="league-row-name">LaLiga</span>
+            </div>
+            <div class="league-row">
+                <div class="league-dot" style="background:#34d399;"></div>
+                <span class="league-row-name">League ONE</span>
+            </div>
+            <div class="league-row">
+                <div class="league-dot" style="background:#a78bfa;"></div>
+                <span class="league-row-name">Serie A</span>
+            </div>
+            <div class="league-row">
+                <div class="league-dot" style="background:#fbbf24;"></div>
+                <span class="league-row-name">Bundesliga</span>
+            </div>
+            <div class="league-row">
+                <div class="league-dot" style="background:#f472b6;"></div>
+                <span class="league-row-name">Fortuna Liga</span>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <a class="nav-item active" href="kontakt.html" style="margin-bottom:0;">
+                <span class="nav-icon">📞</span> Kontakty
+            </a>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <div class="topbar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="page-title">Liga<span>Stats</span></div>
+            </div>
+            <div class="topbar-right">
+                <div class="search">🔍 &nbsp;Hledat týmy, hráče…</div>
+                <div class="season-badge">2025 / 26</div>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <div class="section-label">Kontakt a Podpora</div>
+
+            <div class="contact-grid">
+
+                <div class="contact-info-card">
+                    <div style="margin-bottom: 10px;">
+                        <h2 style="font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Máte
+                            dotaz nebo nápad?</h2>
+                        <p style="font-size: 13px; color: var(--muted); line-height: 1.4;">Všechna data o zápasech,
+                            střelcích a stadionech neustále aktualizujeme. Pokud narazíte na nesrovnalost, máte zájem o
+                            inzerci, nebo chcete do statistik přidat další ligu, napište nám!</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div class="contact-text-title">Obecná podpora</div>
+                            <div class="contact-text-value">support@ligastats.cz</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <div class="contact-text-title">Inzerce a spolupráce</div>
+                            <div class="contact-text-value">partneri@ligastats.cz</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <div class="contact-text-title">Infolinka (Po-Pá, 9:00 - 17:00)</div>
+                            <div class="contact-text-value">+420 777 888 999</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="contact-text-title">Provozovatel projektu</div>
+                            <div class="contact-text-value">LigaStats Media s.r.o.<br><span
+                                    style="font-size:12px; color:var(--muted); font-weight:400;">Stadionová 420/5, 110
+                                    00 Praha 1</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <form action="#" method="POST"
+                        onsubmit="alert('Zpráva byla úspěšně odeslána! Budeme vás kontaktovat co nejdříve.'); return false;">
+                        <div class="form-group">
+                            <label for="name">Jméno a Příjmení / Název firmy</label>
+                            <input type="text" id="name" class="form-control" placeholder="Např. Martin Straka"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mailová adresa</label>
+                            <input type="email" id="email" class="form-control" placeholder="jmeno@domena.cz" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Předmět zprávy</label>
+                            <input type="text" id="subject" class="form-control"
+                                placeholder="Chyba ve statistikách / Návrh na spolupráci" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Text vaší zprávy</label>
+                            <textarea id="message" class="form-control"
+                                placeholder="Dobrý den, chtěl bych nahlásit, že u Harryho Kanea..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Odeslat zprávu přes bezpečné spojení</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="section-label class-faq-title">Často kladené otázky</div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Jak často aktualizujete statistiky zápasů?</div>
+                    <div class="faq-answer">Data o zápasech, tabulkách, střelcích i kartách jsou aktualizována v reálném
+                        čase (LIVE) přímo během odehrávání zápasů všech šesti sledovaných evropských lig.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Odkud čerpáte historická data a kapacity stadionů?</div>
+                    <div class="faq-answer">Spolupracujeme s oficiálními poskytovateli sportovních dat a oficiálními klubovými archivy.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.getElementById('hamburger').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('visible');
+        }
+        function closeSidebar() {
+            document.querySelector('.sidebar').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+            document.getElementById('overlay').classList.remove('visible');
+        }
+    </script>
+
+</body>
+</html>
